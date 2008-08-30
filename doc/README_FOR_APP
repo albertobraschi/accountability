@@ -1,2 +1,10 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+Purpose of this was to throw together an app in an afternoon that would tomoroow let my wife and I start to:
+* Record money spent
+* Where the money was sourced from
+* What the money went towards
+* Provide feed back as we approached our preconfigured amount for that
+* Is extensible so that i can start to do from my phone / laptop etc etc 
+* As well as recording money that moves from a source, money moving into and between the sources wants to be acknowledged
+
+Given those as few simple use case statements.. here are some slightly less so
+* it may be necessary to record with varying degrees of specificity what 'money toward something' means. In otherwords theres a bit of a hierachy of categorisations.
