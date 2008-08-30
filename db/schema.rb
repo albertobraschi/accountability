@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080830043617) do
+ActiveRecord::Schema.define(:version => 20080830211341) do
+
+  create_table "flushes", :force => true do |t|
+    t.date    "flushed_date"
+    t.decimal "amount"
+    t.string  "detail"
+    t.integer "sourced_from_id"
+  end
 
   create_table "sources", :force => true do |t|
     t.string   "title"

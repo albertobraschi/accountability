@@ -1,0 +1,16 @@
+%div[flush]
+  %p.flushed_date
+    %strong Flushed date
+    = h flush.flushed_date
+  %p.amount
+    %strong Amount
+    = h flush.amount
+  %p.detail
+    %strong Detail
+    = h flush.detail
+
+  = link_to 'Show', object_path(flush)
+  |
+  = link_to 'Edit', edit_object_path(flush)
+  |
+  = link_to 'Destroy', object_path(flush), :confirm => 'Really destroy flush?', :method => :delete
