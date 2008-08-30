@@ -6,6 +6,13 @@ vendor/plugins/restful-authentication:
   branch: master
   squash: true
   remote: git://github.com/technoweenie/restful-authentication.git
+vendor/plugins/rspec: 
+  local_branch: braid/git/vendor/plugins/rspec/master
+  type: git
+  revision: 
+  branch: master
+  squash: true
+  remote: git://github.com/dchelimsky/rspec.git
 vendor/plugins/make_resourceful: 
   local_branch: braid/svn/vendor/plugins/make-resourceful
   type: svn
