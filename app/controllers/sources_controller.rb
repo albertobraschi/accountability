@@ -29,7 +29,6 @@ class SourcesController < ApplicationController
   end
 
   def update
-    puts params[:source].inspect
     @source.update_attributes(params[:source])
     redirect_to source_path(@source.id)
   end
