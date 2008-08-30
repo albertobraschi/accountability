@@ -6,3 +6,9 @@ vendor/plugins/restful-authentication:
   branch: master
   squash: true
   remote: git://github.com/technoweenie/restful-authentication.git
+vendor/plugins/make_resourceful: 
+  local_branch: braid/svn/vendor/plugins/make-resourceful
+  type: svn
+  revision: 
+  squash: true
+  remote: http://svn.hamptoncatlin.com/make_resourceful/trunk
