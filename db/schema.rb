@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080830041248) do
+ActiveRecord::Schema.define(:version => 20080830043617) do
+
+  create_table "sources", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "bsb"
+    t.string   "account_number"
+    t.string   "institution"
+    t.string   "source_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40

@@ -32,3 +32,64 @@ Migrating to CreateUsers (20080830041248)
 [0m
   [4;36;1mSQL (0.000251)[0m   [0;1mPRAGMA index_list("users")[0m
   [4;35;1mSQL (0.000186)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.001320)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000833)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001024)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000850)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000229)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080830041248)
+  [4;36;1mSQL (0.000141)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20080830043617)
+  [4;35;1mSQL (0.000137)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000123)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.000851)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000184)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080830041248)
+  [4;36;1mSQL (0.000130)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20080830043617)
+  [4;35;1mSQL (0.000126)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000107)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.004244)[0m   [0mCREATE TABLE "sources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT NULL NULL, "description" varchar(255) DEFAULT NULL NULL, "bsb" varchar(255) DEFAULT NULL NULL, "account_number" varchar(255) DEFAULT NULL NULL, "institution" varchar(255) DEFAULT NULL NULL, "source_type" varchar(255) DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;36;1mSQL (0.002642)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20080830043617')[0m
+  [4;35;1mSQL (0.000369)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000375)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000078)[0m   [0mPRAGMA index_list("sources")[0m
+  [4;36;1mSQL (0.000156)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;35;1mSQL (0.000160)[0m   [0mPRAGMA index_info('index_users_on_login')[0m
+  [4;36;1mSQL (0.000861)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.000220)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.000160)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20080830041248)
+  [4;35;1mSQL (0.000157)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateSources (20080830043617)
+  [4;36;1mSQL (0.000162)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000113)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (0.000165)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.000240)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000042)[0m   [0;1mPRAGMA index_list("sources")[0m
+  [4;35;1mSQL (0.000104)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.000103)[0m   [0;1mPRAGMA index_info('index_users_on_login')[0m

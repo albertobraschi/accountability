@@ -1,0 +1,58 @@
+  [4;36;1mSQL (0.000417)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.000287)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.002520)[0m   [0;1mCREATE TABLE "sources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT NULL NULL, "description" varchar(255) DEFAULT NULL NULL, "bsb" varchar(255) DEFAULT NULL NULL, "account_number" varchar(255) DEFAULT NULL NULL, "institution" varchar(255) DEFAULT NULL NULL, "source_type" varchar(255) DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.000326)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.001389)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40) DEFAULT NULL NULL, "name" varchar(100) DEFAULT '' NULL, "email" varchar(100) DEFAULT NULL NULL, "crypted_password" varchar(40) DEFAULT NULL NULL, "salt" varchar(40) DEFAULT NULL NULL, "created_at" datetime DEFAULT NULL NULL, "updated_at" datetime DEFAULT NULL NULL, "remember_token" varchar(40) DEFAULT NULL NULL, "remember_token_expires_at" datetime DEFAULT NULL NULL) [0m
+  [4;35;1mSQL (0.001564)[0m   [0mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;36;1mSQL (0.000238)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.002956)[0m   [0mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;36;1mSQL (0.001547)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.000259)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.000101)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (0.001247)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20080830043617')[0m
+  [4;36;1mSQL (0.003126)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20080830041248')[0m
+  [4;36;1mSource Create (0.000431)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:10:35', 'An Account', NULL, NULL, NULL, NULL, NULL, '2008-08-30 05:10:35')[0m
+  [4;35;1mSource Create (0.000553)[0m   [0mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:10:35', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:10:35')[0m
+  [4;36;1mSource Create (0.000434)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:12:10', 'An Account', NULL, NULL, NULL, NULL, NULL, '2008-08-30 05:12:10')[0m
+  [4;35;1mSource Create (0.000453)[0m   [0mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:12:10', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:12:10')[0m
+  [4;36;1mSQL (0.000355)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSource Create (0.000430)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:12:39', 'An Account', NULL, NULL, NULL, NULL, NULL, '2008-08-30 05:12:39')[0m
+  [4;35;1mSource Create (0.000451)[0m   [0mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:12:39', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:12:39')[0m
+  [4;36;1mSource Create (0.000472)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:12:59', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:12:59')[0m
+  [4;36;1mSource Create (0.000472)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:13:43', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:13:43')[0m
+  [4;36;1mSource Create (0.000471)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:13:57', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:13:57')[0m
+  [4;36;1mSource Create (0.000457)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:14:17', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:14:17')[0m
+  [4;35;1mSQL (0.000207)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSource Create (0.000490)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:17:39', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:17:39')[0m
+  [4;35;1mSQL (0.000211)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSource Create (0.000462)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:18:03', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:18:03')[0m
+  [4;35;1mSQL (0.000355)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSource Create (0.000467)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:18:42', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:18:42')[0m
+  [4;36;1mSource Create (0.000710)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:19:32', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:19:32')[0m
+  [4;36;1mSource Create (0.000514)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:19:57', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:19:57')[0m
+  [4;36;1mSource Create (0.000478)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:20:00', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:20:00')[0m
+  [4;36;1mSource Create (0.000483)[0m   [0;1mINSERT INTO "sources" ("updated_at", "title", "institution", "description", "bsb", "source_type", "account_number", "created_at") VALUES('2008-08-30 05:20:50', 'AN ACCOUNT', NULL, NULL, NULL, 'SOMETHING', NULL, '2008-08-30 05:20:50')[0m

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+my_bank_account:
+  bsb: 1234-5678
+  institution: some bank
+  title: my account
+  account_number: 82938-239434023
+  source_type: BANKACCOUNT
+
+cookie_jar:
+  title: Cookie jar on fridge
+  source_type: CASH
+
+my_visa_acct:
+  title: my  visa account
+  source_type: VISA
+   
