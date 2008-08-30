@@ -1,0 +1,16 @@
+%fieldset
+  %ul
+    %li
+      %lablel{:for => :source_type}
+      =f.select :source_type, ["VISA", "BANK", "CASH"], :include_blank => " Select type here"
+    - [:title, :description,  :institution, :bsb, :account_number].each do |field|
+      %li
+        %label{:for => field}
+        =field.to_s.humanize
+        = f.text_field field 
+
+%fieldset.form_controls
+  %li
+    %input{:value => "Create", :type => :submit, :alt => "Add Source"}
+    or
+    %a{:href => sources_path} Cancel

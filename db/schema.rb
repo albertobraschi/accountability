@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20080830043617) do
   create_table "sources", :force => true do |t|
     t.string   "title"
     t.string   "description"
+    t.string   "account_name"
     t.string   "bsb"
     t.string   "account_number"
     t.string   "institution"
