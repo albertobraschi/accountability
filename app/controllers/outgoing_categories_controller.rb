@@ -17,7 +17,7 @@ class OutgoingCategoriesController < ApplicationController
 
   def create
     @outgoing_category = OutgoingCategory.create!(params[:outgoing_category])
-    redirect_to outgoing_category_path(@outgoing_category)
+    redirect_to outgoing_categories_path
   rescue
     redirect_to new_outgoing_category_path
   end

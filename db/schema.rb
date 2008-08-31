@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20080831040216) do
     t.date    "flushed_date"
     t.decimal "amount"
     t.string  "detail"
-    t.integer "sourced_from_id"
+    t.integer "source_id"
   end
 
   create_table "outgoing_categories", :force => true do |t|
