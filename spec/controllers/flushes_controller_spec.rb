@@ -6,6 +6,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe FlushesController do
  
+  integrate_views 
   describe "with plural actions" do
 
     it "should get index" do

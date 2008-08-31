@@ -1,6 +1,9 @@
 %h1 Viewing flush
 
 %div[current_object]
+  %p.sourced_from
+    %strong Money flushed from
+    = h current_object.sourced_from.title
   %p.flushed_date
     %strong Flushed date
     = h current_object.flushed_date

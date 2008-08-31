@@ -1,4 +1,7 @@
 %p
+  %label{:for => "flush_flushed_date"} Flushed money from:
+  = f.select :sourced_from_id, @sources
+%p
   %label{:for => "flush_flushed_date"} Flushed date:
   = f.date_select :flushed_date
 %p
