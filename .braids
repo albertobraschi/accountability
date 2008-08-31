@@ -1,11 +1,4 @@
 --- 
-vendor/plugins/rspec-rails: 
-  local_branch: braid/git/vendor/plugins/rspec-rails/master
-  type: git
-  revision: 
-  branch: master
-  squash: true
-  remote: git://github.com/dchelimsky/rspec-rails.git
 vendor/plugins/restful-authentication: 
   local_branch: braid/git/vendor/plugins/restful-authentication/master
   type: git
@@ -13,13 +6,13 @@ vendor/plugins/restful-authentication:
   branch: master
   squash: true
   remote: git://github.com/technoweenie/restful-authentication.git
-vendor/plugins/rspec: 
-  local_branch: braid/git/vendor/plugins/rspec/master
+vendor/plugins/rspec-rails: 
+  local_branch: braid/git/vendor/plugins/rspec-rails/master
   type: git
   revision: 
   branch: master
   squash: true
-  remote: git://github.com/dchelimsky/rspec.git
+  remote: git://github.com/dchelimsky/rspec-rails.git
 vendor/plugins/awesome_nested_set: 
   local_branch: braid/git/vendor/plugins/awesome-nested-set/master
   type: git
@@ -27,6 +20,13 @@ vendor/plugins/awesome_nested_set:
   branch: master
   squash: true
   remote: git://github.com/collectiveidea/awesome_nested_set.git
+vendor/plugins/rspec: 
+  local_branch: braid/git/vendor/plugins/rspec/master
+  type: git
+  revision: 
+  branch: master
+  squash: true
+  remote: git://github.com/dchelimsky/rspec.git
 vendor/plugins/make_resourceful: 
   local_branch: braid/svn/vendor/plugins/make-resourceful
   type: svn
@@ -40,3 +40,9 @@ vendor/plugins/restful_acl:
   branch: master
   squash: true
   remote: git://github.com/mdarby/restful_acl.git
+vendor/plugins/memory_test_fix: 
+  local_branch: braid/svn/vendor/plugins/memory-test-fix
+  type: svn
+  revision: 
+  squash: true
+  remote: http://topfunky.net/svn/plugins/memory_test_fix
