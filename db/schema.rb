@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080830211341) do
+ActiveRecord::Schema.define(:version => 20080831040216) do
 
   create_table "flushes", :force => true do |t|
     t.date    "flushed_date"
@@ -18,9 +18,27 @@ ActiveRecord::Schema.define(:version => 20080830211341) do
     t.integer "sourced_from_id"
   end
 
+  create_table "outgoing_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "outgoing_category_allocations", :force => true do |t|
+    t.integer  "outgoing_category_id"
+    t.integer  "flush_id"
+    t.decimal  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sources", :force => true do |t|
     t.string   "title"
     t.string   "description"
+    t.string   "account_name"
     t.string   "bsb"
     t.string   "account_number"
     t.string   "institution"

@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe SourcesController do
-  integrate_views 
+  #integrate_views 
   describe "with plural actions" do
 
     it "should get index" do

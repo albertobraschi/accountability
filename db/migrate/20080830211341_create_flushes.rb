@@ -4,7 +4,7 @@ class CreateFlushes < ActiveRecord::Migration
       t.column :flushed_date, :date
       t.column :amount, :decimal
       t.column :detail, :string
-      t.column :sourced_from_id, :integer
+      t.column :source_id, :integer
     end
   end
 
