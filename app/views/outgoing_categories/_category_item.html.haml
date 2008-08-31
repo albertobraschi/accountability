@@ -2,5 +2,5 @@
   %li
     = category_item.name
   %li
-    = link_to "Delete", outgoing_category_path(category_item, :method => :delete)
+    = link_to "Delete", outgoing_category_path(category_item), :method => :delete
     = link_to "Edit", edit_outgoing_category_path(category_item)

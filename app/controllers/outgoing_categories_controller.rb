@@ -16,10 +16,14 @@ class OutgoingCategoriesController < ApplicationController
   end
 
   def create
+
     @outgoing_category = OutgoingCategory.create!(params[:outgoing_category])
     redirect_to outgoing_categories_path
-  rescue
+
+  rescue Exception => e
+    flash[:error] = e.record.errors.full_messages
     redirect_to new_outgoing_category_path
+
   end
 
   def update
@@ -32,9 +36,13 @@ class OutgoingCategoriesController < ApplicationController
   end
 
   def destroy
-    if @outgoing_category.destroy
-      flash[:notice] = "Category #{@outgoing_category.title} destroyed"
+    begin
+      @outgoing_category.destroy
+      flash[:notice] = "Category #{@outgoing_category.name} destroyed"
+    rescue Exception => e
+      flash[:error] = @outgoing_category.errors.full_messages
     end
+    redirect_to outgoing_categories_path 
   end
 
   protected
