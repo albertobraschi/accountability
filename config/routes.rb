@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.resources :sources
-  map.resources :flushes, :has_many => :outgoing_category_allocations
+  map.resources :outgoings, :has_many => :outgoing_category_allocations
   map.resources :outgoing_categories
 
   # The priority is based upon order of creation: first created -> highest priority.
