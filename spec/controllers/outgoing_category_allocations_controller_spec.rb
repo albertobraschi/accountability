@@ -10,7 +10,7 @@ describe OutgoingCategoryAllocationsController do
   describe " working in context of outgoing " do
     before(:each) do
       @outgoing = mock("outgoing")
-      Flush.stub!(:find).and_return(@outgoing)
+      Outgoing.stub!(:find).and_return(@outgoing)
       @allocation = mock("outgoing_category_animation")
       @allocation.stub!(:id).and_return(1)
       @outgoing.stub!(:outgoing_category_allocations).and_return(@allocation)

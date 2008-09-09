@@ -11,13 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 20080831040216) do
 
-  create_table "flushes", :force => true do |t|
-    t.date    "flushed_date"
-    t.decimal "amount"
-    t.string  "detail"
-    t.integer "source_id"
-  end
-
   create_table "outgoing_categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
@@ -29,10 +22,17 @@ ActiveRecord::Schema.define(:version => 20080831040216) do
 
   create_table "outgoing_category_allocations", :force => true do |t|
     t.integer  "outgoing_category_id"
-    t.integer  "flush_id"
+    t.integer  "outgoing_id"
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "outgoings", :force => true do |t|
+    t.date    "outgoing_date"
+    t.decimal "amount"
+    t.string  "detail"
+    t.integer "source_id"
   end
 
   create_table "sources", :force => true do |t|
