@@ -4,7 +4,7 @@ describe OutgoingCategoryAllocation do
   before(:each) do
     @valid_attributes = {
       :outgoing_category_id => "1",
-      :flush_id => "1",
+      :outgoing_id => "1",
       :amount => "9.99"
     }
   end

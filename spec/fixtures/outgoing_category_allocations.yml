@@ -2,10 +2,10 @@
 
 one:
   outgoing_category_id: 1
-  flush_id: 1
+  outgoing_id: 1
   amount: 9.99
 
 two:
   outgoing_category_id: 1
-  flush_id: 1
+  outgoing_id: 1
   amount: 9.99
