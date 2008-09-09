@@ -1040,103 +1040,73 @@ href="InstanceMethods.html#M000027">parent</a>, except self
             onclick="toggleCode('M000057-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000057-source">
 <pre>
-     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 461</span>
-461:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">move_to</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">position</span>)
-462:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-value str">&quot;You cannot move a new node&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_record?</span>
-463: 
-464:           <span class="ruby-comment cmt"># extent is the width of the tree self and children</span>
-465:           <span class="ruby-identifier">extent</span> = <span class="ruby-identifier">right</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-466: 
-467:           <span class="ruby-identifier">transaction</span> <span class="ruby-keyword kw">do</span>
-468:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>
-469:               <span class="ruby-identifier">target</span>.<span class="ruby-identifier">reload_nested_set</span>
-470:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">position</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:root</span>
-471:               <span class="ruby-comment cmt"># load object if node is not an object</span>
-472:               <span class="ruby-identifier">target</span> = <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">target</span>)
-473:             <span class="ruby-keyword kw">end</span>
-474:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">reload_nested_set</span>
-475:           
-476:             <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">position</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:root</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">move_possible?</span>(<span class="ruby-identifier">target</span>)
-477:               <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-value str">&quot;Impossible move, target node cannot be inside moved tree.&quot;</span>
-478:             <span class="ruby-keyword kw">end</span>
-479:           
-480:             <span class="ruby-comment cmt"># compute new left/right for self</span>
-481:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">position</span>
-482:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:child</span>
-483:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">left</span>
-484:                 <span class="ruby-identifier">new_left</span>  = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-485:                 <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">extent</span>
-486:               <span class="ruby-keyword kw">else</span>
-487:                 <span class="ruby-identifier">new_left</span>  = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">extent</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-488:                 <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span>
-489:               <span class="ruby-keyword kw">end</span>
-490:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:left</span>
-491:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">left</span>
-492:                 <span class="ruby-identifier">new_left</span>  = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span>
-493:                 <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">extent</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-494:               <span class="ruby-keyword kw">else</span>
-495:                 <span class="ruby-identifier">new_left</span>  = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">extent</span>
-496:                 <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">left</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-497:               <span class="ruby-keyword kw">end</span>
-498:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:right</span>
-499:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">right</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">right</span>
-500:                 <span class="ruby-identifier">new_left</span>  = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">right</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-501:                 <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">right</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">extent</span>
-502:               <span class="ruby-keyword kw">else</span>
-503:                 <span class="ruby-identifier">new_left</span>  = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">right</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">extent</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-504:                 <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">right</span>
-505:               <span class="ruby-keyword kw">end</span>
-506:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:root</span>
-507:               <span class="ruby-identifier">new_left</span>  = <span class="ruby-value">1</span>
-508:               <span class="ruby-identifier">new_right</span> = <span class="ruby-identifier">extent</span>
-509:             <span class="ruby-keyword kw">else</span>
-510:               <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-node">&quot;Position should be either left, right or child ('#{position}' received).&quot;</span>
-511:             <span class="ruby-keyword kw">end</span>
-512: 
-513:             <span class="ruby-comment cmt"># boundaries of update action</span>
-514:             <span class="ruby-identifier">b_left</span>, <span class="ruby-identifier">b_right</span> = [<span class="ruby-identifier">left</span>, <span class="ruby-identifier">new_left</span>].<span class="ruby-identifier">min</span>, [<span class="ruby-identifier">right</span>, <span class="ruby-identifier">new_right</span>].<span class="ruby-identifier">max</span>
-515: 
-516:             <span class="ruby-comment cmt"># Shift value to move self to new position</span>
-517:             <span class="ruby-identifier">shift</span> = <span class="ruby-identifier">new_left</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span>
-518: 
-519:             <span class="ruby-comment cmt"># Shift value to move nodes inside boundaries but not under self_and_children</span>
-520:             <span class="ruby-identifier">updown</span> = (<span class="ruby-identifier">shift</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>) <span class="ruby-operator">?</span> <span class="ruby-operator">-</span><span class="ruby-identifier">extent</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">extent</span>
-521: 
-522:             <span class="ruby-comment cmt"># change nil to NULL for new parent</span>
-523:             <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">position</span>
-524:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:child</span>
-525:               <span class="ruby-identifier">new_parent</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">id</span>
-526:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:root</span>
-527:               <span class="ruby-identifier">new_parent</span> = <span class="ruby-keyword kw">nil</span>
-528:             <span class="ruby-keyword kw">else</span>
-529:               <span class="ruby-identifier">new_parent</span> = <span class="ruby-identifier">target</span>[<span class="ruby-identifier">parent_column_name</span>]
-530:             <span class="ruby-keyword kw">end</span>
-531: 
-532:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">update_all</span>([
-533:               <span class="ruby-node">&quot;#{quoted_left_column_name} = CASE &quot;</span> <span class="ruby-operator">+</span>
-534:                 <span class="ruby-node">&quot;WHEN #{quoted_left_column_name} BETWEEN :left AND :right &quot;</span> <span class="ruby-operator">+</span>
-535:                   <span class="ruby-node">&quot;THEN #{quoted_left_column_name} + :shift &quot;</span> <span class="ruby-operator">+</span>
-536:                 <span class="ruby-node">&quot;WHEN #{quoted_left_column_name} BETWEEN :b_left AND :b_right &quot;</span> <span class="ruby-operator">+</span>
-537:                   <span class="ruby-node">&quot;THEN #{quoted_left_column_name} + :updown &quot;</span> <span class="ruby-operator">+</span>
-538:                 <span class="ruby-node">&quot;ELSE #{quoted_left_column_name} END, &quot;</span> <span class="ruby-operator">+</span>
-539:               <span class="ruby-node">&quot;#{quoted_right_column_name} = CASE &quot;</span> <span class="ruby-operator">+</span>
-540:                 <span class="ruby-node">&quot;WHEN #{quoted_right_column_name} BETWEEN :left AND :right &quot;</span> <span class="ruby-operator">+</span>
-541:                   <span class="ruby-node">&quot;THEN #{quoted_right_column_name} + :shift &quot;</span> <span class="ruby-operator">+</span>
-542:                 <span class="ruby-node">&quot;WHEN #{quoted_right_column_name} BETWEEN :b_left AND :b_right &quot;</span> <span class="ruby-operator">+</span>
-543:                   <span class="ruby-node">&quot;THEN #{quoted_right_column_name} + :updown &quot;</span> <span class="ruby-operator">+</span>
-544:                 <span class="ruby-node">&quot;ELSE #{quoted_right_column_name} END, &quot;</span> <span class="ruby-operator">+</span>
-545:               <span class="ruby-node">&quot;#{quoted_parent_column_name} = CASE &quot;</span> <span class="ruby-operator">+</span>
-546:                 <span class="ruby-node">&quot;WHEN #{self.class.base_class.primary_key} = :id &quot;</span> <span class="ruby-operator">+</span>
-547:                   <span class="ruby-value str">&quot;THEN :new_parent &quot;</span> <span class="ruby-operator">+</span>
-548:                 <span class="ruby-node">&quot;ELSE #{quoted_parent_column_name} END&quot;</span>,
-549:               {<span class="ruby-identifier">:left</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">left</span>, <span class="ruby-identifier">:right</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">right</span>, <span class="ruby-identifier">:b_left</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b_left</span>, <span class="ruby-identifier">:b_right</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b_right</span>,
-550:                 <span class="ruby-identifier">:shift</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">shift</span>, <span class="ruby-identifier">:updown</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">updown</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>,
-551:                 <span class="ruby-identifier">:new_parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_parent</span>}
-552:             ], <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">proxy_options</span>[<span class="ruby-identifier">:conditions</span>])
-553:           <span class="ruby-keyword kw">end</span>
-554:           <span class="ruby-identifier">target</span>.<span class="ruby-identifier">reload_nested_set</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>
-555:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">reload_nested_set</span>
-556:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 462</span>
+462:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">move_to</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">position</span>)
+463:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-value str">&quot;You cannot move a new node&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_record?</span>
+464: 
+465:           <span class="ruby-identifier">transaction</span> <span class="ruby-keyword kw">do</span>
+466:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>
+467:               <span class="ruby-identifier">target</span>.<span class="ruby-identifier">reload_nested_set</span>
+468:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">position</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:root</span>
+469:               <span class="ruby-comment cmt"># load object if node is not an object</span>
+470:               <span class="ruby-identifier">target</span> = <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">target</span>)
+471:             <span class="ruby-keyword kw">end</span>
+472:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">reload_nested_set</span>
+473:           
+474:             <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">position</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:root</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">move_possible?</span>(<span class="ruby-identifier">target</span>)
+475:               <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-value str">&quot;Impossible move, target node cannot be inside moved tree.&quot;</span>
+476:             <span class="ruby-keyword kw">end</span>
+477:             
+478:             <span class="ruby-identifier">bound</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">position</span>
+479:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:child</span>;  <span class="ruby-identifier">target</span>[<span class="ruby-identifier">right_column_name</span>]
+480:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:left</span>;   <span class="ruby-identifier">target</span>[<span class="ruby-identifier">left_column_name</span>]
+481:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:right</span>;  <span class="ruby-identifier">target</span>[<span class="ruby-identifier">right_column_name</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+482:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:root</span>;   <span class="ruby-value">1</span>
+483:               <span class="ruby-keyword kw">else</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordError</span>, <span class="ruby-node">&quot;Position should be :child, :left, :right or :root ('#{position}' received).&quot;</span>
+484:             <span class="ruby-keyword kw">end</span>
+485:           
+486:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bound</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">right_column_name</span>]
+487:               <span class="ruby-identifier">bound</span> = <span class="ruby-identifier">bound</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+488:               <span class="ruby-identifier">other_bound</span> = <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">right_column_name</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+489:             <span class="ruby-keyword kw">else</span>
+490:               <span class="ruby-identifier">other_bound</span> = <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">left_column_name</span>] <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+491:             <span class="ruby-keyword kw">end</span>
+492: 
+493:             <span class="ruby-comment cmt"># there would be no change</span>
+494:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bound</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">right_column_name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">bound</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">left_column_name</span>]
+495:           
+496:             <span class="ruby-comment cmt"># we have defined the boundaries of two non-overlapping intervals, </span>
+497:             <span class="ruby-comment cmt"># so sorting puts both the intervals and their boundaries in order</span>
+498:             <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">d</span> = [<span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">left_column_name</span>], <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">right_column_name</span>], <span class="ruby-identifier">bound</span>, <span class="ruby-identifier">other_bound</span>].<span class="ruby-identifier">sort</span>
+499: 
+500:             <span class="ruby-identifier">new_parent</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">position</span>
+501:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:child</span>;  <span class="ruby-identifier">target</span>.<span class="ruby-identifier">id</span>
+502:               <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:root</span>;   <span class="ruby-keyword kw">nil</span>
+503:               <span class="ruby-keyword kw">else</span>          <span class="ruby-identifier">target</span>[<span class="ruby-identifier">parent_column_name</span>]
+504:             <span class="ruby-keyword kw">end</span>
+505: 
+506:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">update_all</span>([
+507:               <span class="ruby-node">&quot;#{quoted_left_column_name} = CASE &quot;</span> <span class="ruby-operator">+</span>
+508:                 <span class="ruby-node">&quot;WHEN #{quoted_left_column_name} BETWEEN :a AND :b &quot;</span> <span class="ruby-operator">+</span>
+509:                   <span class="ruby-node">&quot;THEN #{quoted_left_column_name} + :d - :b &quot;</span> <span class="ruby-operator">+</span>
+510:                 <span class="ruby-node">&quot;WHEN #{quoted_left_column_name} BETWEEN :c AND :d &quot;</span> <span class="ruby-operator">+</span>
+511:                   <span class="ruby-node">&quot;THEN #{quoted_left_column_name} + :a - :c &quot;</span> <span class="ruby-operator">+</span>
+512:                 <span class="ruby-node">&quot;ELSE #{quoted_left_column_name} END, &quot;</span> <span class="ruby-operator">+</span>
+513:               <span class="ruby-node">&quot;#{quoted_right_column_name} = CASE &quot;</span> <span class="ruby-operator">+</span>
+514:                 <span class="ruby-node">&quot;WHEN #{quoted_right_column_name} BETWEEN :a AND :b &quot;</span> <span class="ruby-operator">+</span>
+515:                   <span class="ruby-node">&quot;THEN #{quoted_right_column_name} + :d - :b &quot;</span> <span class="ruby-operator">+</span>
+516:                 <span class="ruby-node">&quot;WHEN #{quoted_right_column_name} BETWEEN :c AND :d &quot;</span> <span class="ruby-operator">+</span>
+517:                   <span class="ruby-node">&quot;THEN #{quoted_right_column_name} + :a - :c &quot;</span> <span class="ruby-operator">+</span>
+518:                 <span class="ruby-node">&quot;ELSE #{quoted_right_column_name} END, &quot;</span> <span class="ruby-operator">+</span>
+519:               <span class="ruby-node">&quot;#{quoted_parent_column_name} = CASE &quot;</span> <span class="ruby-operator">+</span>
+520:                 <span class="ruby-node">&quot;WHEN #{self.class.base_class.primary_key} = :id THEN :new_parent &quot;</span> <span class="ruby-operator">+</span>
+521:                 <span class="ruby-node">&quot;ELSE #{quoted_parent_column_name} END&quot;</span>,
+522:               {<span class="ruby-identifier">:a</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">a</span>, <span class="ruby-identifier">:b</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b</span>, <span class="ruby-identifier">:c</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">c</span>, <span class="ruby-identifier">:d</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">d</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">:new_parent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_parent</span>}
+523:             ], <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">proxy_options</span>[<span class="ruby-identifier">:conditions</span>])
+524:           <span class="ruby-keyword kw">end</span>
+525:           <span class="ruby-identifier">target</span>.<span class="ruby-identifier">reload_nested_set</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">target</span>
+526:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">reload_nested_set</span>
+527:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -1165,11 +1135,12 @@ class, using the :scope declared in the acts_as_nested_set declaration.
      <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 414</span>
 414:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">nested_set_scope</span>
 415:           <span class="ruby-identifier">options</span> = {<span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">quoted_left_column_name</span>}
-416:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:conditions</span>] = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">acts_as_nested_set_options</span>[<span class="ruby-identifier">:scope</span>]).<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">conditions</span>,<span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
-417:             <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">attr</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">attr</span>]
-418:           <span class="ruby-keyword kw">end</span>
-419:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">scoped</span> <span class="ruby-identifier">options</span>
-420:         <span class="ruby-keyword kw">end</span>
+416:           <span class="ruby-identifier">scopes</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">acts_as_nested_set_options</span>[<span class="ruby-identifier">:scope</span>])
+417:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:conditions</span>] = <span class="ruby-identifier">scopes</span>.<span class="ruby-identifier">inject</span>({}) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">conditions</span>,<span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
+418:             <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">attr</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">attr</span>]
+419:           <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">scopes</span>.<span class="ruby-identifier">empty?</span>
+420:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">scoped</span> <span class="ruby-identifier">options</span>
+421:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -1194,29 +1165,29 @@ href="InstanceMethods.html#M000020">left</a> so the counts still work.
             onclick="toggleCode('M000055-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000055-source">
 <pre>
-     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 432</span>
-432:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prune_from_tree</span>
-433:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">right</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">left</span>.<span class="ruby-identifier">nil?</span>
-434:           <span class="ruby-identifier">diff</span> = <span class="ruby-identifier">right</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-435: 
-436:           <span class="ruby-identifier">delete_method</span> = <span class="ruby-identifier">acts_as_nested_set_options</span>[<span class="ruby-identifier">:dependent</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:destroy</span> <span class="ruby-operator">?</span>
-437:             <span class="ruby-identifier">:destroy_all</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:delete_all</span>
-438: 
-439:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword kw">do</span>
-440:             <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">delete_method</span>,
-441:               [<span class="ruby-node">&quot;#{quoted_left_column_name} &gt; ? AND #{quoted_right_column_name} &lt; ?&quot;</span>,
-442:                 <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>]
-443:             )
-444:             <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">update_all</span>(
-445:               [<span class="ruby-node">&quot;#{quoted_left_column_name} = (#{quoted_left_column_name} - ?)&quot;</span>, <span class="ruby-identifier">diff</span>],
-446:               [<span class="ruby-node">&quot;#{quoted_left_column_name} &gt;= ?&quot;</span>, <span class="ruby-identifier">right</span>]
-447:             )
-448:             <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">update_all</span>(
-449:               [<span class="ruby-node">&quot;#{quoted_right_column_name} = (#{quoted_right_column_name} - ?)&quot;</span>, <span class="ruby-identifier">diff</span>],
-450:               [<span class="ruby-node">&quot;#{quoted_right_column_name} &gt;= ?&quot;</span>, <span class="ruby-identifier">right</span>]
-451:             )
-452:           <span class="ruby-keyword kw">end</span>
-453:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 433</span>
+433:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prune_from_tree</span>
+434:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">right</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">left</span>.<span class="ruby-identifier">nil?</span>
+435:           <span class="ruby-identifier">diff</span> = <span class="ruby-identifier">right</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+436: 
+437:           <span class="ruby-identifier">delete_method</span> = <span class="ruby-identifier">acts_as_nested_set_options</span>[<span class="ruby-identifier">:dependent</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">:destroy</span> <span class="ruby-operator">?</span>
+438:             <span class="ruby-identifier">:destroy_all</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:delete_all</span>
+439: 
+440:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword kw">do</span>
+441:             <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">delete_method</span>,
+442:               [<span class="ruby-node">&quot;#{quoted_left_column_name} &gt; ? AND #{quoted_right_column_name} &lt; ?&quot;</span>,
+443:                 <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>]
+444:             )
+445:             <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">update_all</span>(
+446:               [<span class="ruby-node">&quot;#{quoted_left_column_name} = (#{quoted_left_column_name} - ?)&quot;</span>, <span class="ruby-identifier">diff</span>],
+447:               [<span class="ruby-node">&quot;#{quoted_left_column_name} &gt;= ?&quot;</span>, <span class="ruby-identifier">right</span>]
+448:             )
+449:             <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">update_all</span>(
+450:               [<span class="ruby-node">&quot;#{quoted_right_column_name} = (#{quoted_right_column_name} - ?)&quot;</span>, <span class="ruby-identifier">diff</span>],
+451:               [<span class="ruby-node">&quot;#{quoted_right_column_name} &gt;= ?&quot;</span>, <span class="ruby-identifier">right</span>]
+452:             )
+453:           <span class="ruby-keyword kw">end</span>
+454:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -1241,11 +1212,11 @@ href="InstanceMethods.html#M000027">parent</a>
             onclick="toggleCode('M000056-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000056-source">
 <pre>
-     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 456</span>
-456:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reload_nested_set</span>
-457:           <span class="ruby-identifier">reload</span>(<span class="ruby-identifier">:select</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{quoted_left_column_name}, &quot;</span> <span class="ruby-operator">+</span>
-458:             <span class="ruby-node">&quot;#{quoted_right_column_name}, #{quoted_parent_column_name}&quot;</span>)
-459:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 457</span>
+457:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reload_nested_set</span>
+458:           <span class="ruby-identifier">reload</span>(<span class="ruby-identifier">:select</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{quoted_left_column_name}, &quot;</span> <span class="ruby-operator">+</span>
+459:             <span class="ruby-node">&quot;#{quoted_right_column_name}, #{quoted_parent_column_name}&quot;</span>)
+460:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -1268,13 +1239,13 @@ on creation, set automatically lft and rgt to the end of the tree
             onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000054-source">
 <pre>
-     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 423</span>
-423:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_default_left_and_right</span>
-424:           <span class="ruby-identifier">maxright</span> = <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">maximum</span>(<span class="ruby-identifier">right_column_name</span>) <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
-425:           <span class="ruby-comment cmt"># adds the new node to the right of all existing nodes</span>
-426:           <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">left_column_name</span>] = <span class="ruby-identifier">maxright</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-427:           <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">right_column_name</span>] = <span class="ruby-identifier">maxright</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
-428:         <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File vendor/plugins/awesome_nested_set/lib/awesome_nested_set.rb, line 424</span>
+424:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_default_left_and_right</span>
+425:           <span class="ruby-identifier">maxright</span> = <span class="ruby-identifier">nested_set_scope</span>.<span class="ruby-identifier">maximum</span>(<span class="ruby-identifier">right_column_name</span>) <span class="ruby-operator">||</span> <span class="ruby-value">0</span>
+426:           <span class="ruby-comment cmt"># adds the new node to the right of all existing nodes</span>
+427:           <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">left_column_name</span>] = <span class="ruby-identifier">maxright</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+428:           <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">right_column_name</span>] = <span class="ruby-identifier">maxright</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
+429:         <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
