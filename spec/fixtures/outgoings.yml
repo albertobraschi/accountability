@@ -1,0 +1,10 @@
+one:
+  id: 1
+  outgoing_date: 2008-08-31
+  amount: 9.99
+  detail: MyString
+two:
+  id: 2
+  outgoing_date: 2008-08-31
+  amount: 9.99
+  detail: MyString

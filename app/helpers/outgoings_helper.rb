@@ -1,0 +1,2 @@
+module OutgoingsHelper
+end
