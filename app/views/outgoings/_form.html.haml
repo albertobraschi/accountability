@@ -1,12 +1,12 @@
 %p
-  %label{:for => "outgoing_outgoing_date"} outgoing money from:
+  %label{:for => "source"} outgoing money from:
   = f.select :source_id, @sources
 %p
-  %label{:for => "outgoing_outgoing_date"} outgoing date:
+  %label{:for => "outgoing_date"} outgoing date:
   = f.date_select :outgoing_date
 %p
-  %label{:for => "outgoing_amount"} Amount:
+  %label{:for => "amount"} Amount:
   = f.text_field :amount
 %p
-  %label{:for => "outgoing_detail"} Detail:
+  %label{:for => "detail"} Detail:
   = f.text_field :detail
