@@ -12,4 +12,5 @@ describe Outgoing do
   it "should create a new instance" do
     (@outgoing = Outgoing.create)
   end
+
 end
