@@ -1,5 +1,6 @@
 class OutgoingCategoriesController < ApplicationController
   before_filter :set_singular_context, :only => %w( show edit update destroy )
+  before_filter :set_parent_context, :only => %w( create update )
 
   def index
     @outgoing_categories = OutgoingCategory.paginate(:all, :page => params[:page])
@@ -18,6 +19,7 @@ class OutgoingCategoriesController < ApplicationController
   def create
 
     @outgoing_category = OutgoingCategory.create!(params[:outgoing_category])
+    @outgoing_category.move_to_child_of @requested_parent if @requested_parent
     redirect_to outgoing_categories_path
 
   rescue Exception => e
@@ -47,9 +49,12 @@ class OutgoingCategoriesController < ApplicationController
   end
 
   protected
-  def set_singular_context
+  def set_parent_context
     parent_id = params[:outgoing_category][:parent_id] if params[:outgoing_category]
     @requested_parent = OutgoingCategory.find(parent_id) if parent_id
+  end
+
+  def set_singular_context
     @outgoing_category = OutgoingCategory.find(params[:id])
   end
 end
