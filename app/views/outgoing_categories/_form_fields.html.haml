@@ -3,5 +3,7 @@
     %li
       %label{:for => :name} Name
       = form_fields.text_field :name
+      %label{:for => :parent} Parent 
+      = form_fields.select :parent_id, nested_set_options(OutgoingCategory, @outgoing_category){ |i| "#{'..' * i.level} #{i.name}" }, :include_blank => "-- set parent--"
 %fieldset
   =form_fields.submit "Save"

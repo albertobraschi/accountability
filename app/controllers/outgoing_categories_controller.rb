@@ -28,6 +28,7 @@ class OutgoingCategoriesController < ApplicationController
 
   def update
     if @outgoing_category.update_attributes(params[:outgoing_category])
+       @outgoing_category.move_to_child_of @requested_parent
        rpath = outgoing_categories_path
     else
        rpath = edit_outgoing_category_path
@@ -47,6 +48,8 @@ class OutgoingCategoriesController < ApplicationController
 
   protected
   def set_singular_context
+    parent_id = params[:outgoing_category][:parent_id] if params[:outgoing_category]
+    @requested_parent = OutgoingCategory.find(parent_id) if parent_id
     @outgoing_category = OutgoingCategory.find(params[:id])
   end
 end

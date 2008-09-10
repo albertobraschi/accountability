@@ -15,9 +15,12 @@ describe OutgoingCategoriesController do
   describe " singular context actions " do
     before(:each) do
       @outgoing_category = mock("outgoing_category")
+      @parent = mock("outgoing_category")
       OutgoingCategory.stub!(:find).and_return(@outgoing_category)
       @outgoing_category.stub!(:id).and_return(999)
       @outgoing_category.stub!(:errors).and_return(ActiveRecord::Errors.new(@outgoing_category))
+      @outgoing_category.stub!(:parent).and_return(@parent)
+      @outgoing_category.stub!(:move_to_child_of).and_return(@outgoing_category)
     end
 
     it "should show category, like /outgoing_categories/999" do
