@@ -12,5 +12,7 @@ describe OutgoingCategoryAllocation do
   it "should create a new instance given valid attributes" do
     OutgoingCategoryAllocation.create!(@valid_attributes)
   end
+ 
+
 
 end
