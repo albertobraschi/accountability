@@ -35,7 +35,10 @@ describe OutgoingCategoryAllocation do
     @outgoing.outgoing_category_allocations.of_name("Groceries")[0].total.should eql(111.50)
     @outgoing.outgoing_category_allocations.of_name("Fresh Food")[0].amount.should == 10.00.to_d
     @outgoing.outgoing_category_allocations.of_name("Fresh Food")[0].total.should == 110.00.to_d
-    #TODO: @outgoing.outgoing_category_allocations.of_name("Fresh Food").total.should == 110.00.to_d < this would be nice 
   end
- 
+  
+  it "should apply total to collection" do
+    @outgoing.outgoing_category_allocations.of_name("Fresh Food").each{|x| puts x.outgoing_category.name; x.total.should == 110.00.to_d }
+    @outgoing.outgoing_category_allocations.of_name("Fresh Food").total.should == 110.00.to_d 
+  end
 end
