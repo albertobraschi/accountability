@@ -1,4 +1,12 @@
 module Scenarios
+  def typical_outgoing_scenario
+    Outgoing.create( { :detail => "Flushed some money",
+      :amount => 111.50,
+      :outgoing_date => "2008/10/10"
+    })
+   end
+
+
   module Categories
     def grocery_categories_scenario
       @groceries = OutgoingCategory.create( :name => "Groceries" )
@@ -10,6 +18,7 @@ module Scenarios
       @meat.move_to_child_of @freshfood
       @organic = OutgoingCategory.create(:name => "Organic")
       @organic.move_to_child_of @veges
+      [@groceries, @freshfood, @veges, @meat, @organic].each{|o| o.reload}
     end
   end
  
@@ -26,6 +35,12 @@ module Scenarios
       allocated_to.outgoing_category_allocations.create(:outgoing_category => @veges, :amount => 25.00) 
       allocated_to.outgoing_category_allocations.create(:outgoing_category => @meat, :amount => 35.00) 
       allocated_to.outgoing_category_allocations.create(:outgoing_category => @organic, :amount => 60.00) 
+    end
+
+    def meat_n_vege_allocation_scenario(allocated_to)
+      allocated_to.outgoing_category_allocations.create(:outgoing_category => @veges, :amount => 25.00) 
+      allocated_to.outgoing_category_allocations.create(:outgoing_category => @meat, :amount => 35.00) 
+      allocated_to.outgoing_category_allocations.create(:outgoing_category => @organic, :amount => 40.00) 
     end
   end
 end

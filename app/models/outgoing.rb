@@ -5,12 +5,10 @@ class Outgoing < ActiveRecord::Base
 
 
   def amount_allocated
-    self.outgoing_category_allocations.sum(:amount) 
+    self.outgoing_category_allocations.sum(:amount) || 0
   end
 
   def fully_allocated?
-    puts self.amount
-    puts self.amount_allocated
     (self.amount == self.amount_allocated )
   end
 

@@ -4,7 +4,29 @@ class OutgoingCategoryAllocation < ActiveRecord::Base
 
  named_scope :of_name,
    lambda{ |name| 
-     {:conditions => ["outgoing_category.name = ?", name],
-    :joins => "outgoing_category"}
+     {:conditions => ["outgoing_categories.name = ?", name],
+     :include => "outgoing_category"}
    }
+ 
+  named_scope :by_outgoing,
+    lambda{ |outgoing|
+      { :conditions => ["outgoing_id = ?", outgoing] }
+    }
+
+  named_scope :by_categories_descending_from,
+    lambda{ |category|
+      { :conditions => {:outgoing_category_id => category.self_and_descendants.collect{|c| c}} }
+    }
+
+  def sub_allocations
+    OutgoingCategoryAllocation.by_outgoing(self.outgoing).by_categories_descending_from(self.outgoing_category)
+  end
+
+  def self.total
+    self.all.inject(0){|x, allocation| x + allocation.total - allocation.amount}
+  end
+
+  def total
+    self.sub_allocations.sum(:amount)
+  end
 end
