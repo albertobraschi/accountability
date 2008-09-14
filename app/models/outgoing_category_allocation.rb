@@ -1,16 +1,16 @@
 class OutgoingCategoryAllocation < ActiveRecord::Base
- belongs_to :outgoing_category
- belongs_to :outgoing
+  belongs_to :outgoing_category
+  belongs_to :outgoing
 
- named_scope :of_name,
+  named_scope :of_name,
    lambda{ |name| 
      {:conditions => ["outgoing_categories.name = ?", name],
-     :include => "outgoing_category"}
+       :include => "outgoing_category"}
    } do 
-     def total
-        find(:all).sum(&:total)
-     end
-   end
+    def total
+      find(:all).sum(&:total)
+    end
+  end
  
   named_scope :by_outgoing,
     lambda{ |outgoing|
@@ -22,16 +22,11 @@ class OutgoingCategoryAllocation < ActiveRecord::Base
       { :conditions => {:outgoing_category_id => category.self_and_descendants.collect{|c| c}} }
     }
 
-  def sub_allocations
-    OutgoingCategoryAllocation.by_outgoing(self.outgoing).by_categories_descending_from(self.outgoing_category)
-  end
+   def sub_allocations
+     OutgoingCategoryAllocation.by_outgoing(self.outgoing).by_categories_descending_from(self.outgoing_category)
+   end
 
-
-#  def self.total
-#    self.all.inject(0){|x, allocation| x + allocation.total - allocation.amount}
-#  end
-
-  def total
-   self.sub_allocations.sum(:amount)
-  end
+   def total
+     self.sub_allocations.sum(:amount)
+   end
 end

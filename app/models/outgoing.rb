@@ -1,6 +1,12 @@
 class Outgoing < ActiveRecord::Base
   belongs_to :source
-  has_many :outgoing_category_allocations do; def sumtotal;puts "[["; find(:all).each{|x| puts x.sumtotal};puts "]]";end; end
+
+  has_many :outgoing_category_allocations do
+    def total
+      find(:all).sum(&:total)
+    end
+  end
+
   has_many :outgoing_categories, :through => :outgoing_category_allocations
 
 
