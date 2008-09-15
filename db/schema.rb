@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080831040216) do
+ActiveRecord::Schema.define(:version => 20080915000947) do
 
   create_table "outgoing_categories", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20080831040216) do
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "comment"
   end
 
   create_table "outgoings", :force => true do |t|

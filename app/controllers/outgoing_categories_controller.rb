@@ -25,7 +25,6 @@ class OutgoingCategoriesController < ApplicationController
   rescue Exception => e
     flash[:error] = e.record.errors.full_messages
     redirect_to new_outgoing_category_path
-
   end
 
   def update
@@ -51,7 +50,7 @@ class OutgoingCategoriesController < ApplicationController
   protected
   def set_parent_context
     parent_id = params[:outgoing_category][:parent_id] if params[:outgoing_category]
-    @requested_parent = OutgoingCategory.find(parent_id) if parent_id
+    @requested_parent = OutgoingCategory.find(parent_id) unless parent_id.blank?
   end
 
   def set_singular_context
