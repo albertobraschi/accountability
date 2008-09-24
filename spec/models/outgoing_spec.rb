@@ -11,7 +11,7 @@ describe Outgoing do
     before(:each) do
 
       @outgoing = typical_outgoing_scenario
-			grocery_categories_scenario
+      grocery_categories_scenario
       grocery_allocation_scenario @outgoing
     end
 
@@ -44,15 +44,15 @@ describe Outgoing do
       @outgoing.fully_allocated?.should be_true
     end
 
-		it "should peer deeply into its allocations successfully" do
-		  #this should is placed here to ensure that the outgoing id is correctly used
-			#passed down the chain
+    it "should peer deeply into its allocations successfully" do
+      #this should is placed here to ensure that the outgoing id is correctly used
+      #passed down the chain
       #freshfood_allocation_scenario @outgoing
       #meat_n_vege_allocation_scenario @outgoing
       #@outgoing.outgoing_category_allocations.of_name("Groceries")[0].total.should == 111.50
       #@outgoing.outgoing_category_allocations.of_name("Fresh Food")[0].amount.should == 10.00
       #@outgoing.outgoing_category_allocations.of_name("Fresh Food")[0].total.should == 110.00
-		end
+    end
   end
 end
 
