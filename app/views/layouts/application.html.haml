@@ -7,4 +7,19 @@
   %body
     .flash=flash[:error] if flash[:error]
     .flash=flash[:notice] if flash[:notice]
+    %ol.navigation
+      %li
+        Maintenance
+        %ol.navigation
+          %li
+            %a{:href => sources_path} Sources
+          %li
+            %a{:href => outgoing_categories_path} Outgoing Categories
+      %li 
+        Outgoings
+        %ol 
+          %li
+            %a{:href => outgoings_path} Outgoings
+          %li
+            %a{:href => new_outgoing_path} Enter an outgoing
     =yield
