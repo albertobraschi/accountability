@@ -5,4 +5,6 @@
         ="#{source.title} - #{source.source_type}"
         %p.description=source.description if source.description
         %p.bank_detail="#{source.institution} #{source.account_name} #{source.bsb} #{source.account_number}"
+=link_to "New", new_source_path
 = will_paginate @sources
+
