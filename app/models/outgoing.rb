@@ -1,5 +1,5 @@
 class Outgoing < ActiveRecord::Base
-  belongs_to :source
+  belongs_to :account
 
   has_many :outgoing_category_allocations do
     def total

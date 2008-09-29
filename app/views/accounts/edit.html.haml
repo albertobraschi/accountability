@@ -1,0 +1,4 @@
+%h2.form
+  ="Edit #{@account.title}"
+  -form_for @account, :url => url_for(@account), :html => {:method => :put} do |f|
+    = render :partial => "form_fields", :locals => {:f => f}

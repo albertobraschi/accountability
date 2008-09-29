@@ -1,4 +1,0 @@
-%h2.form
-  ="Edit #{@source.title}"
-  -form_for @source, :url => url_for(@source), :html => {:method => :put} do |f|
-    = render :partial => "form_fields", :locals => {:f => f}

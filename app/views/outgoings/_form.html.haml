@@ -1,6 +1,6 @@
 %p
-  %label{:for => "source"} outgoing money from:
-  = f.select :source_id, @sources
+  %label{:for => "account"} outgoing money from:
+  = f.select :account_id, @accounts
 %p
   %label{:for => "outgoing_date"} outgoing date:
   = f.date_select :outgoing_date

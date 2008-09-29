@@ -1,0 +1,20 @@
+Story: "Accounts"
+ 
+  As an admin
+  I want to create accounts
+  So I can account money
+
+  Scenario: Create a new account
+
+    Given a new VISA account
+    And a number of existing accounts
+
+    When I save the account
+
+    Then the account should be valid
+    And there should be 1 more account
+
+
+
+
+

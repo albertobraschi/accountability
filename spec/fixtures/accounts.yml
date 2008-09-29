@@ -5,13 +5,13 @@ my_bank_account:
   institution: some bank
   title: my account
   account_number: 82938-239434023
-  source_type: BANKACCOUNT
+  account_type: BANKACCOUNT
 
 cookie_jar:
   title: Cookie jar on fridge
-  source_type: CASH
+  account_type: CASH
 
 my_visa_acct:
   title: my  visa account
-  source_type: VISA
+  account_type: VISA
    

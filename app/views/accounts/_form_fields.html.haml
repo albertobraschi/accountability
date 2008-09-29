@@ -1,8 +1,8 @@
 %fieldset
   %ul
     %li
-      %lablel{:for => :source_type}
-      =f.select :source_type, ["VISA", "BANK", "CASH"], :include_blank => " Select type here"
+      %lablel{:for => :account_type}
+      =f.select :account_type, ["VISA", "BANK", "CASH"], :include_blank => " Select type here"
     - [:title, :description,  :institution, :bsb, :account_number].each do |field|
       %li
         %label{:for => field}
@@ -11,6 +11,6 @@
 
 %fieldset.form_controls
   %li
-    %input{:value => "Create", :type => :submit, :alt => "Add Source"}
+    %input{:value => "Create", :type => :submit, :alt => "Add Account"}
     or
-    %a{:href => sources_path} Cancel
+    %a{:href => accounts_path} Cancel
