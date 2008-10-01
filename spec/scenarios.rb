@@ -2,10 +2,22 @@ module Scenarios
   def typical_outgoing_scenario
     Outgoing.create( { :detail => "Flushed some money",
       :amount => 111.50,
-      :outgoing_date => "2008/10/10"
+      :outgoing_date => "2006/10/10"
     })
    end
 
+
+  module Outgoings
+    def previous_outgoings_scenario(account=nil, prior_to=DateTime.now, qty=10)
+      qty.times do |index|
+        Outgoing.create( { :detail => "A previous expense",
+          :amount => 11.50,
+          :outgoing_date => prior_to - index
+        })
+      end
+     
+    end
+  end
 
   module Categories
     def grocery_categories_scenario

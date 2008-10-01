@@ -15,6 +15,14 @@ Story: "Accounts"
     And there should be 1 more account
 
 
+  Scenario: Spending money from an account
+    Given an account called 'My Wallet' with an opening balance of 100.00
+
+    When 35.00 is spent on lunch
+    And 60.00 is spent on fuel
+
+    Then the account should have a balance of 5.00
+
 
 
 

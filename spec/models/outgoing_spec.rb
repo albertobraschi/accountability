@@ -1,11 +1,13 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require File.expand_path(File.dirname(__FILE__) + '/../scenarios')
 
+include Scenarios
+include Scenarios::Outgoings
+include Scenarios::Categories
+include Scenarios::Allocations
 
 describe Outgoing do
-  include Scenarios
-  include Scenarios::Categories
-  include Scenarios::Allocations
+
 
   describe "allocating amounts to categories" do
     before(:each) do
@@ -53,6 +55,19 @@ describe Outgoing do
       #@outgoing.outgoing_category_allocations.of_name("Fresh Food")[0].amount.should == 10.00
       #@outgoing.outgoing_category_allocations.of_name("Fresh Food")[0].total.should == 110.00
     end
+  end
+
+  describe "Testing prior to date named_scope" do
+    it 'should correctly sum outgoings prior to dates given' do
+      test_date = ('2005-03-25').to_date
+      previous_outgoings_scenario nil, test_date , 10
+      Outgoing.up_until('2005-10-10').length.should == 10
+      Outgoing.sum_to_date('2005-10-10').should == 115.0
+      (9..0).each do |index|
+        newresult +=  11.50
+        Outgoing.sum_to_date(test_date - index).sum(&:amount).should == 11.50
+      end
+    end    
   end
 end
 
