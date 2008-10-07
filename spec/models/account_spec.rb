@@ -46,7 +46,13 @@ describe Account do
       outgoing = typical_outgoing_scenario
       @account.outgoings << outgoing
       @account.current_balance.should == 111.50.to_d
-      
+    end
+
+    it 'should reflect incoming in its balance' do
+      pending
+      #incoming = typical_incoming_scenario
+      #@account.incoming << incoming
+      #@account.current_balance.should == 335.00.to_d
     end
 
   end

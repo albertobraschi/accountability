@@ -4,8 +4,14 @@ module Scenarios
       :amount => 111.50,
       :outgoing_date => "2006/10/10"
     })
-   end
+  end
 
+  def typical_incoming_scenario
+     Incoming.create( { :detail => "Got some money",
+      :amount => 111.50,
+      :outgoing_date => "2006/10/10"
+    })
+  end
 
   module Outgoings
     def previous_outgoings_scenario(account=nil, prior_to=DateTime.now, qty=10)

@@ -58,6 +58,12 @@ steps_for (:accounts) do
   Then("the category $category should  have a total of $total spend on it") do |balance|
     pending
   end
+
+  Given("When $amount is deposited") do |account|
+    @account.incomings <<  Incoming.create(:amount => amount.to_d, 
+                               :outgoing_date => Date.today 
+  end
+
 end
 
 with_steps_for(:accounts) do

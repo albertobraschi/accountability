@@ -24,5 +24,10 @@ Story: "Accounts"
     Then the account should have a balance of 5.00
 
 
+  Scenario: Depositing money into an account
+    Given an account called "My Bank" with an opening balance of 100.00
 
+    When 22.50 is deposited
+
+    Then the account should have a balance of 122.50
 
