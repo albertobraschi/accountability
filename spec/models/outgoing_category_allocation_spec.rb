@@ -3,8 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../scenarios')
 
 describe OutgoingCategoryAllocation do
   include Scenarios
-  include Scenarios::Categories
-  include Scenarios::Allocations
+  include Scenarios::Out::Categories
+  include Scenarios::Out::Allocations
 
  before(:each) do
     #OutgoingCategoryAllocation.destroy_all

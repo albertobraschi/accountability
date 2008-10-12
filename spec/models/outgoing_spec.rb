@@ -2,9 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require File.expand_path(File.dirname(__FILE__) + '/../scenarios')
 
 include Scenarios
-include Scenarios::Outgoings
-include Scenarios::Categories
-include Scenarios::Allocations
+include Scenarios::Out::Outgoings
+include Scenarios::Out::Categories
+include Scenarios::Out::Allocations
 
 describe Outgoing do
 
@@ -57,15 +57,16 @@ describe Outgoing do
     end
   end
 
-  describe "Testing prior to date named_scope" do
+  describe "Balances at certain dates" do
     it 'should correctly sum outgoings prior to dates given' do
       test_date = ('2005-03-25').to_date
-      previous_outgoings_scenario nil, test_date , 10
-      Outgoing.up_until('2005-10-10').length.should == 10
-      Outgoing.sum_to_date('2005-10-10').should == 115.0
+      previous_outgoings_scenario nil, test_date , 10 #set up 10 transactions
+      Outgoing.up_until('2005-10-10').length.should == 10 #confirm we have 10 transactions
+      Outgoing.sum_to_date('2005-10-10').should == 115.0 # and that they add up
       (9..0).each do |index|
         newresult +=  11.50
-        Outgoing.sum_to_date(test_date - index).sum(&:amount).should == 11.50
+        #Outgoing.sum_to_date(test_date - index).sum(&:amount).should == 11.50
+        Outgoing.sum_to_date(test_date - index).should == newresult
       end
     end    
   end

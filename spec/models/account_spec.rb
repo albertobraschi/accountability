@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require File.expand_path(File.dirname(__FILE__) + '/../scenarios')
 
 include Scenarios
-include Scenarios::Categories
+include Scenarios::Out::Categories
 describe Account do
 
   describe "account validity" do
@@ -26,6 +26,8 @@ describe Account do
 
   describe 'account balances' do
     before(:each) do
+      Incoming.delete_all
+      Outgoing.delete_all
       @account =  Account.create(:title => "Wallet", 
                                  :account_type => "CASH", 
                                  :opening_balance => 223.00
@@ -49,10 +51,9 @@ describe Account do
     end
 
     it 'should reflect incoming in its balance' do
-      pending
-      #incoming = typical_incoming_scenario
-      #@account.incoming << incoming
-      #@account.current_balance.should == 335.00.to_d
+      incoming = typical_incoming_scenario
+      @account.incomings << incoming
+      @account.current_balance.should == 334.50.to_d
     end
 
   end

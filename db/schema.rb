@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081001075903) do
+ActiveRecord::Schema.define(:version => 20081011023230) do
 
   create_table "accounts", :force => true do |t|
     t.string   "title"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20081001075903) do
     t.datetime "updated_at"
     t.decimal  "opening_balance", :default => 0.0
     t.date     "opening_date"
+  end
+
+  create_table "incomings", :force => true do |t|
+    t.date    "incoming_date"
+    t.decimal "amount"
+    t.string  "detail"
+    t.integer "account_id"
   end
 
   create_table "outgoing_categories", :force => true do |t|
