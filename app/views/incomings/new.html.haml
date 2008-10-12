@@ -1,0 +1,9 @@
+%h1 Creating incoming
+
+= error_messages_for :incoming
+
+- form_for(:incoming, :url => objects_url) do |f|
+  = render :partial => "form", :locals => {:f => f}
+  %p= submit_tag "Create"
+
+= link_to 'Back', objects_path

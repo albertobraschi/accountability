@@ -1,0 +1,12 @@
+%p
+  %label{:for => "account"} incoming money from:
+  = f.select :account_id, @accounts
+%p
+  %label{:for => "incoming_date"} incoming date:
+  = f.date_select :incoming_date
+%p
+  %label{:for => "amount"} Amount:
+  = f.text_field :amount
+%p
+  %label{:for => "detail"} Detail:
+  = f.text_field :detail

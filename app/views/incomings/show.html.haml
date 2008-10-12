@@ -1,0 +1,23 @@
+%h1 Viewing incoming
+
+%div[current_object]
+  %p.account
+    %strong Money incoming from
+    = h current_object.account.title if current_object.account
+  %p.incoming_date
+    %strong incoming date
+    = h current_object.incoming_date
+  %p.amount
+    %strong Amount
+    = h current_object.amount
+  %p.detail
+    %strong Detail
+    = h current_object.detail
+
+= link_to 'Edit', edit_object_path
+|
+= link_to 'Destroy', object_path, :confirm => 'Really destroy incoming?', :method => :delete
+|
+= link_to 'Back', objects_path
+
+

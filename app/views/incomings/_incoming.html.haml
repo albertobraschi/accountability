@@ -1,0 +1,20 @@
+%div[incoming]
+  %p.account
+    %strong incominging money from
+    = h incoming.account.title 
+  %p.incoming_date
+    %strong incoming date
+    = h incoming.incoming_date
+  %p.amount
+    %strong Amount
+    = h incoming.amount
+  %p.detail
+    %strong Detail
+    = h incoming.detail
+
+  = link_to 'Show', object_path(incoming)
+  |
+  = link_to 'Edit', edit_object_path(incoming)
+  |
+  = link_to 'Destroy', object_path(incoming), :confirm => 'Really destroy incoming?', :method => :delete
+
