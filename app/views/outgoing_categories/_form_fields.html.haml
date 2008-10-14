@@ -3,7 +3,17 @@
     %li
       %label{:for => :name} Name
       = form_fields.text_field :name
+    %li
       %label{:for => :parent} Parent 
       = form_fields.select :parent_id, nested_set_options(OutgoingCategory, @outgoing_category){ |i| "#{'..' * i.level} #{i.name}" }, :include_blank => "-- set parent--"
+    %li
+      %label{:for => :budgeted_amount} Budgeted Amount
+      = form_fields.text_field :budgeted_amount
+    %li
+      %label{:for => :budgeted_period_type} Budgeted Period Type
+      = form_fields.select :budgeted_period_type, ["Daily", "Weekly", "Fortnightly", "Monthly", "Bi-Monthly", "Quaterly", "Half Yearly", "Annually"]
+    %li
+      %label{:for => :budgeted_period_start_date} Budgeted Start Date
+      = form_fields.date_select :budgeted_period_start_date
 %fieldset
   =form_fields.submit "Save"

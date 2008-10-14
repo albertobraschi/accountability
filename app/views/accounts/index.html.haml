@@ -1,10 +1,11 @@
 -for account in @accounts
-  %ul.index
-    %li
-      %h2
-        ="#{account.title} - #{account.account_type}"
-        %p.description=account.description if account.description
-        %p.bank_detail="#{account.institution} #{account.account_name} #{account.bsb} #{account.account_number}"
-=link_to "New", new_account_path
+  %a{:href => edit_account_path(account)}
+    %ul.index
+      %li
+        %h2
+          ="#{account.title} - #{account.account_type} - #{account.current_balance}"
+          %p.description=account.description if account.description
+          %p.bank_detail="#{account.institution} #{account.account_name} #{account.bsb} #{account.account_number}"
+= link_to "New", new_account_path
 = will_paginate @accounts
 

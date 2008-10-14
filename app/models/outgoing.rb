@@ -1,6 +1,9 @@
 class Outgoing < ActiveRecord::Base
   belongs_to :account
 
+  #validates_presence_of :account
+  validates_numericality_of :amount
+
   named_scope :up_until, lambda { |d| 
     d = d.to_date.to_s 
     {:conditions => ['outgoing_date <= ?',d] }

@@ -14,11 +14,6 @@
     %strong Detail
     = h current_object.detail
 
-= link_to 'Edit', edit_object_path
-|
-= link_to 'Destroy', object_path, :confirm => 'Really destroy outgoing?', :method => :delete
-|
-= link_to 'Back', objects_path
 
 %div
   %h2 Where'd the money go?
@@ -29,4 +24,10 @@
     %li
       %table#allocations
         = render :partial => "outgoing_category_allocation", :collection => current_object.outgoing_category_allocations
- 
+
+= link_to 'Edit', edit_object_path
+|
+= link_to 'Destroy', object_path, :confirm => 'Really destroy outgoing?', :method => :delete
+|
+= link_to 'Back', objects_path
+

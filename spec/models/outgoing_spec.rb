@@ -40,7 +40,7 @@ describe Outgoing do
     it "should fix over allocation, and acknowledge being fully allocated correctly" do
       freshfood_allocation_scenario @outgoing
       meat_n_vege_over_allocation_scenario @outgoing
-      @outgoing.outgoing_category_allocations.of_name(@organic.name)[0].update_attributes!(:amount => 40.00) 
+      @outgoing.outgoing_category_allocations.of_name(@organic.name).first.update_attributes!(:amount => 40.00) 
       @outgoing.amount_allocated.should == 111.50.to_d
       @outgoing.amount_unallocated.should == 0.0.to_d 
       @outgoing.fully_allocated?.should be_true

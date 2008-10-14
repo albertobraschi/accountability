@@ -11,10 +11,11 @@
   %p.detail
     %strong Detail
     = h outgoing.detail
-
   = link_to 'Show', object_path(outgoing)
   |
   = link_to 'Edit', edit_object_path(outgoing)
   |
   = link_to 'Destroy', object_path(outgoing), :confirm => 'Really destroy outgoing?', :method => :delete
+  %p
+    = h outgoing.fully_allocated? ? "Fully allocated" : "#{outgoing.amount_allocated} | #{outgoing.amount_unallocated}"
 

@@ -1,9 +1,9 @@
-%fieldset
+%fieldset.bla
   %ul
     %li
       %lablel{:for => :account_type}
       =f.select :account_type, ["VISA", "BANK", "CASH"], :include_blank => " Select type here"
-    - [:title, :description,  :institution, :bsb, :account_number].each do |field|
+    - [:title, :description,  :institution, :bsb, :account_number, :opening_balance].each do |field|
       %li
         %label{:for => field}
         =field.to_s.humanize
@@ -14,3 +14,4 @@
     %input{:value => "Create", :type => :submit, :alt => "Add Account"}
     or
     %a{:href => accounts_path} Cancel
+
