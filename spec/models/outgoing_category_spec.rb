@@ -59,4 +59,22 @@ describe OutgoingCategory do
     category_two.children.should == [category_four]
     category_four.parent.should == category_two 
   end
+
+  it "should correctly sum child categories" do 
+    pending
+  end
+
+  it "should alert if sub categories are over budgeted" do
+    pending
+  end
+
+  it "should set budget amount to total of children" do
+    pending
+  end
+
+  it "should set budget amount to total of child budgets + own budget" do
+  end
+
+  it "should know own budget after amount of child budgets removed" do
+  end
 end

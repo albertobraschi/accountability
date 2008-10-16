@@ -20,7 +20,7 @@ class OutgoingCategoriesController < ApplicationController
 
     @outgoing_category = OutgoingCategory.create!(params[:outgoing_category])
     @outgoing_category.move_to_child_of @requested_parent if @requested_parent
-    redirect_to outgoing_categories_path
+    redirect_to new_outgoing_category_path
 
   rescue Exception => e
     flash[:error] = e.record.errors.full_messages
@@ -29,7 +29,7 @@ class OutgoingCategoriesController < ApplicationController
 
   def update
     if @outgoing_category.update_attributes(params[:outgoing_category])
-       @outgoing_category.move_to_child_of @requested_parent
+       @outgoing_category.move_to_child_of @requested_parent if @requested_parent
        rpath = outgoing_categories_path
     else
        rpath = edit_outgoing_category_path
