@@ -61,7 +61,7 @@ steps_for (:accounts) do
 
   Given("When $amount is deposited") do |account|
     @account.incomings <<  Incoming.create(:amount => amount.to_d, 
-                               :outgoing_date => Date.today 
+                               :outgoing_date => Date.today )
   end
 
 end
