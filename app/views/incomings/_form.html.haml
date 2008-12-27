@@ -1,9 +1,9 @@
 %p
-  %label{:for => "account"} incoming money from:
+  %label{:for => "account"} incoming money to:
   = f.select :account_id, @accounts
 %p
-  %label{:for => "incoming_date"} incoming date:
-  = f.date_select :incoming_date
+  %label{:for => "transaction_date"} incoming date:
+  = f.date_select :transaction_date
 %p
   %label{:for => "amount"} Amount:
   = f.text_field :amount

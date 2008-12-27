@@ -1,0 +1,13 @@
+-remote_form_for @category_allocation, :url => outgoing_category_allocations_path(@transaction), :update => :allocations, :position => :bottom, :success => "Effect.Fade($('new_allocation'));$('new_allocation').innerHTML = ' ';"  do |allocation_form|
+  %fieldset
+    %ul
+      %li
+        %label{:for => :category} Category
+        = allocation_form.select :category_id, @category_options
+      %li
+        %label{:for => :outgoing_category} Amount
+        = allocation_form.text_field :amount
+  %fieldset
+    %ul
+      %il
+        =allocation_form.submit "Allocate"

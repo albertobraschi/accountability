@@ -1,6 +1,6 @@
-class OutgoingCategory < ActiveRecord::Base
-  has_many :outgoing_category_allocations
-  has_many :outgoings, :through => :outgoing_category_allocations 
+class Category < ActiveRecord::Base
+  has_many :category_allocations
+  has_many :catgories, :through => :_category_allocations 
   validates_presence_of :name
 
   acts_as_nested_set
@@ -8,9 +8,11 @@ class OutgoingCategory < ActiveRecord::Base
   CONVERSION_RATES = { :annually => 52.00,
                        :quaterly => 13.00,
                        :monthly =>  52.0 / 12.0,
-                       :weekly => 1.0 } 
+                       :weekly => 1.0 
+                      } 
+
   def remaining_budget
-    self.budgeted_amount - (self.outgoing_category_allocations.sum(:amount) || 0.00).to_d
+    self.budgeted_amount - (self._category_allocations.sum(:amount) || 0.00).to_d
   end
 
   def total_budget

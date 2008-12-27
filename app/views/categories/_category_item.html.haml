@@ -6,5 +6,5 @@
     = category_item.budgeted_period_type
     = category_item.budgeted_period_start_date
   %li
-    = link_to "Delete", outgoing_category_path(category_item), :method => :delete
-    = link_to "Edit", edit_outgoing_category_path(category_item)
+    = link_to "Delete", category_path(category_item), :method => :delete
+    = link_to "Edit", edit_category_path(category_item)

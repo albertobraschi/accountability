@@ -25,14 +25,7 @@ ActiveRecord::Schema.define(:version => 20081014065128) do
     t.date     "opening_date"
   end
 
-  create_table "incomings", :force => true do |t|
-    t.date    "incoming_date"
-    t.decimal "amount"
-    t.string  "detail"
-    t.integer "account_id"
-  end
-
-  create_table "outgoing_categories", :force => true do |t|
+  create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.integer  "lft"
@@ -44,17 +37,17 @@ ActiveRecord::Schema.define(:version => 20081014065128) do
     t.date     "budgeted_period_start_date"
   end
 
-  create_table "outgoing_category_allocations", :force => true do |t|
-    t.integer  "outgoing_category_id"
-    t.integer  "outgoing_id"
+  create_table "category_allocations", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "transaction_id"
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "comment"
   end
 
-  create_table "outgoings", :force => true do |t|
-    t.date    "outgoing_date"
+  create_table "transactions", :force => true do |t|
+    t.date    "transaction_date"
     t.decimal "amount"
     t.string  "detail"
     t.integer "account_id"

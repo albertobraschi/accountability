@@ -2,7 +2,7 @@
   %ul
     %li
       %label{:for => :parent} Parent 
-      = form_fields.select :parent_id, nested_set_options(OutgoingCategory, @outgoing_category){ |i| "#{'..' * i.level} #{i.name}" }, :include_blank => "-- set parent--"
+      = form_fields.select :parent_id, nested_set_options(Category, @outgoingcategory){ |i| "#{'..' * i.level} #{i.name}" }, :include_blank => "-- set parent--"
     %li
       %label{:for => :name} Name
       = form_fields.text_field :name

@@ -9,9 +9,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.resources :accounts
-  map.resources :outgoings, :has_many => :outgoing_category_allocations
-  map.resources :outgoing_categories
-  map.resources :incomings
+  map.resources :outgoings, :has_many => :category_allocations
+  map.resources :incomings, :has_many => :category_allocations
+  map.resources :categories
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

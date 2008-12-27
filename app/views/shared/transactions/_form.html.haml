@@ -1,9 +1,9 @@
 %p
-  %label{:for => "account"} outgoing money from:
+  %label{:for => "account"} Account money from/to:
   = f.select :account_id, @accounts
 %p
-  %label{:for => "outgoing_date"} outgoing date:
-  = f.date_select :outgoing_date
+  %label{:for => "transaction_date"} Date:
+  = f.date_select :transaction_date
 %p
   %label{:for => "amount"} Amount:
   = f.text_field :amount

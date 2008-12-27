@@ -4,7 +4,7 @@
     = h incoming.account.title 
   %p.incoming_date
     %strong incoming date
-    = h incoming.incoming_date
+    = h incoming.transaction_date
   %p.amount
     %strong Amount
     = h incoming.amount
@@ -18,3 +18,4 @@
   |
   = link_to 'Destroy', object_path(incoming), :confirm => 'Really destroy incoming?', :method => :delete
 
+  = h incoming.fully_allocated? ? "Fully allocated" : "#{incoming.amount_allocated} | #{incoming.amount_unallocated}"

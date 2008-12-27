@@ -3,7 +3,7 @@
 = error_messages_for :incoming
 
 - form_for(:incoming, :url => object_url, :html => { :method => :put }) do |f|
-  = render :partial => "form", :locals => {:f => f}
+  = render :partial => "/shared/transactions/form", :locals => {:f => f}
   %p= submit_tag "Update"
 
 = link_to 'Show', object_path

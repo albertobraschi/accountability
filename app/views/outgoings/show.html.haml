@@ -6,7 +6,7 @@
     = h current_object.account.title if current_object.account
   %p.outgoing_date
     %strong outgoing date
-    = h current_object.outgoing_date
+    = h current_object.transaction_date
   %p.amount
     %strong Amount
     = h current_object.amount
@@ -19,11 +19,11 @@
   %h2 Where'd the money go?
   %ul
     %li
-      = link_to_remote "Add allocation", :url => new_outgoing_outgoing_category_allocation_path(current_object), :method  => :get, :position => :bottom, :update => :new_allocation, :complete => "Effect.Appear($('new_allocation'))"
+      = link_to_remote "Add allocation", :url => new_outgoing_category_allocation_path(current_object), :method  => :get, :position => :bottom, :update => :new_allocation, :complete => "Effect.Appear($('new_allocation'))"
     %li#new_allocation{:style => "display:none"}
     %li
       %table#allocations
-        = render :partial => "outgoing_category_allocation", :collection => current_object.outgoing_category_allocations
+        = render :partial => "category_allocation", :collection => current_object.category_allocations
 
 = link_to 'Edit', edit_object_path
 |

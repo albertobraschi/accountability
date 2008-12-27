@@ -16,7 +16,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.create(params[:account])
     if @account.save
-      flash[:notice] = "Transaction Created"
+      flash[:notice] = "Account Created"
       new_path = accounts_path
     else
       flash[:error] =  @account.errors.full_messages
