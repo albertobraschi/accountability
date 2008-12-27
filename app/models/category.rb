@@ -27,7 +27,7 @@ class Category < ActiveRecord::Base
     end
     #refactor this so that a 'remaining budget' can be calculated for any period
     #when changing this also see that update_bought_forward reflects same logic for prevous period
-    (self.budgeted_amount || 0.0) - (self.outgoing_category_allocations.occuring_between(this_period[:start],this_period[:end]).sum(:amount).to_f || 0.0) + bought_forward 
+    (self.budgeted_amount || 0.0) - (self.category_allocations.occuring_between(this_period[:start],this_period[:end]).sum(:amount).to_f || 0.0) + bought_forward 
   end
 
   def total_budget
@@ -35,7 +35,7 @@ class Category < ActiveRecord::Base
   end
 
   def total_remaining_budget
-    total_budget - self.self_and_descendants.inject(0.00){|i,c| i +  (c.outgoing_category_allocations.sum(:amount).to_f || 0.00)}
+    total_budget - self.self_and_descendants.inject(0.00){|i,c| i +  (c.category_allocations.sum(:amount).to_f || 0.00)}
   end
 
   def exceeded_budget?
@@ -97,7 +97,7 @@ class Category < ActiveRecord::Base
 
   protected 
   def update_bought_forward
-    self.bought_forward = (self.budgeted_amount || 0.0) - (self.outgoing_category_allocations.occuring_between(last_period[:start],last_period[:end]).sum(:amount).to_f || 0.0) + bought_forward 
+    self.bought_forward = (self.budgeted_amount || 0.0) - (self.category_allocations.occuring_between(last_period[:start],last_period[:end]).sum(:amount).to_f || 0.0) + bought_forward 
     self.date_bought_forward = Date.today
     save!
   end

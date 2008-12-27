@@ -2,11 +2,7 @@
   %ul
     %li
       %label{:for => :parent} Parent 
-<<<<<<< Updated upstream:app/views/categories/_form_fields.html.haml
       = form_fields.select :parent_id, nested_set_options(Category, @outgoingcategory){ |i| "#{'..' * i.level} #{i.name}" }, :include_blank => "-- set parent--"
-=======
-      = form_fields.select :parent_id, category_selection, :include_blank => "-- set parent--"
->>>>>>> Stashed changes:app/views/outgoing_categories/_form_fields.html.haml
     %li
       %label{:for => :name} Name
       = form_fields.text_field :name
