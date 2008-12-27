@@ -77,4 +77,34 @@ describe OutgoingCategory do
 
   it "should know own budget after amount of child budgets removed" do
   end
+ 
+  describe "Category finding its place in time" do
+    describe "--weekly--" do
+      before(:each) do
+        @category = OutgoingCategory.create( :name => "one", :budgeted_period_start_date => "2007-10-13".to_date, :budgeted_period_type => "weekly" )
+      end
+
+      it "should identify current periods start and end date for weekly budget" do
+        class Date
+          def self.today
+            "2007-10-15".to_date
+          end
+        end
+        @category.this_period[:start].should == "2007-10-13".to_date
+        @category.this_period[:end].should == "2007-10-20".to_date
+      end
+
+      it "should identify current periods start  and end date for weekly budget" do
+        class Date
+          def self.today
+            "2007-12-18".to_date
+          end
+        end
+        puts Date.today
+        @category.this_period[:start].should == "2007-12-15".to_date 
+        @category.this_period[:end].should == "2007-12-22".to_date 
+      end
+
+    end
+  end 
 end

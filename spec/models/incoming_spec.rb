@@ -9,9 +9,8 @@ describe Incoming do
       test_date = ('2005-03-25').to_date
       previous_incoming_scenario nil, test_date , 10
       Incoming.up_until('2005-10-10').length.should == 10
-      Incoming.sum_to_date('2005-10-10').should == 11115.10
+      Incoming.sum_to_date('2005-10-10').should == 11115.10.to_d
       (9..0).each do |index|
-        
         Incoming.sum_to_date(test_date - index).should == newresult
       end
     end    

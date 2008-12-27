@@ -2,7 +2,10 @@
   %li
     = category_item.parent.name if category_item.parent
     = category_item.name
+    = category_item.remaining_budget
+    from
     = category_item.budgeted_amount
+    = " plus #{category_item.total_budget} in sub categories" if category_item.descendants.any?
     = category_item.budgeted_period_type
     = category_item.budgeted_period_start_date
   %li

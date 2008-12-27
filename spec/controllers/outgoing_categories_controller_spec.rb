@@ -2,9 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe OutgoingCategoriesController do
 
-
-
-
   describe "root level categories" do
     before(:each) do
       @outgoing_category = mock("outgoing_category")

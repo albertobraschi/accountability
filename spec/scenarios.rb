@@ -28,14 +28,14 @@ module Scenarios
 
     module Categories
       def grocery_categories_scenario
-        @groceries = OutgoingCategory.create( :name => "Groceries" )
-        @freshfood = OutgoingCategory.create( :name => "Fresh Food" )
+        @groceries = OutgoingCategory.create( :name => "Groceries", :budgeted_period_type => "WEEKLY", :budgeted_period_start_date => "2006/10/3" )
+        @freshfood = OutgoingCategory.create( :name => "Fresh Food", :budgeted_period_type => "WEEKLY", :budgeted_period_start_date => "2006/10/3"  )
         @freshfood.move_to_child_of @groceries
-        @veges = OutgoingCategory.create(:name => "Fruit and Veges")
+        @veges = OutgoingCategory.create(:name => "Fruit and Veges", :budgeted_period_type => "WEEKLY", :budgeted_period_start_date => "2006/10/3" )
         @veges.move_to_child_of @freshfood
-        @meat = OutgoingCategory.create(:name => "Meat")
+        @meat = OutgoingCategory.create(:name => "Meat", :budgeted_period_type => "WEEKLY", :budgeted_period_start_date => "2006/10/3" )
         @meat.move_to_child_of @freshfood
-        @organic = OutgoingCategory.create(:name => "Organic")
+        @organic = OutgoingCategory.create(:name => "Organic", :budgeted_period_type => "WEEKLY", :budgeted_period_start_date => "2006/10/3" )
         @organic.move_to_child_of @veges
         [@groceries, @freshfood, @veges, @meat, @organic].each{|o| o.reload}
       end
