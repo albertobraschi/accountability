@@ -1,6 +1,8 @@
 class CategoryAllocation < ActiveRecord::Base
   belongs_to :category
-  belongs_to :transaction
+  belongs_to :outgoing, :class_name => "Outgoing", :foreign_key => :transaction_id
+  belongs_to :incoming, :class_name => "Incoming", :foreign_key => :transaction_id
+
 
   named_scope :of_name,
     lambda{ |name| 

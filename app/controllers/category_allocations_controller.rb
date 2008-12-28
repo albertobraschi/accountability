@@ -15,6 +15,7 @@ class CategoryAllocationsController < ApplicationController
 
   def create
     @category_allocation = @transaction.category_allocations.create(params[:category_allocation])
+    @category_allocation.save
     render :action => :show
   end
 

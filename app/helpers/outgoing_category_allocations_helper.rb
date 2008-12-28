@@ -1,2 +1,0 @@
-module OutgoingCategoryAllocationsHelper
-end

@@ -21,7 +21,7 @@
     %li#new_allocation{:style => "display:none"}
     %li
       %table#allocations
-        = render :partial => "category_allocation", :collection => current_object.category_allocations
+        = render :partial => "category_allocations/category_allocation", :collection => current_object.category_allocations
 
 = link_to 'Edit', edit_object_path
 |

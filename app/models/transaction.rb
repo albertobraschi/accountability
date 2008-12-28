@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
   belongs_to :account
-
+  validates_presence_of :account
   validates_numericality_of :amount
 
   named_scope :up_until, lambda { |d| 
