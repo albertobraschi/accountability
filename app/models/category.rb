@@ -7,6 +7,7 @@ class Category < ActiveRecord::Base
 
   validates_presence_of :budgeted_period_start_date
   validates_presence_of :budgeted_period_type
+  validates_presence_of :type
 
   CONVERSION_RATES = { :annually => 52.00,
                        :quaterly => 13.00,
@@ -15,6 +16,9 @@ class Category < ActiveRecord::Base
                       } 
 
   before_validation :set_defaults
+  
+  named_scope :incoming, :conditions => "type = 'incoming'"
+  named_scope :outgoing, :conditions => "type = 'outgoing'"
 
   def set_defaults
     self.budgeted_period_type = "weekly" unless budgeted_period_type

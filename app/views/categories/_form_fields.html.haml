@@ -1,8 +1,13 @@
 %fieldset
   %ul
     %li
+      %label{:for => :type}Incoming
+      = form_fields.radio_button :type, "Incoming"
+      %label{:for => :type}Outgoing
+      = form_fields.radio_button :type, "Outgoing"
+    %li
       %label{:for => :parent} Parent 
-      = form_fields.select :parent_id, nested_set_options(Category, @outgoingcategory){ |i| "#{'..' * i.level} #{i.name}" }, :include_blank => "-- set parent--"
+      = form_fields.select :parent_id, category_selection, :include_blank => "-- set parent--"
     %li
       %label{:for => :name} Name
       = form_fields.text_field :name

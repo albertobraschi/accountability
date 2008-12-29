@@ -18,9 +18,11 @@ class CategoriesController < ApplicationController
 
   def create
 
-    @category = Category.create!(params[:category])
+    @category = Category.new(params[:category])
+    @category.type = params[:category][:type]
+    @category.save!
     @category.move_to_child_of @requested_parent if @requested_parent
-    redirect_to new_category_path
+    redirect_to categories_path 
 
   rescue Exception => e
     flash[:error] = e.record.errors.full_messages

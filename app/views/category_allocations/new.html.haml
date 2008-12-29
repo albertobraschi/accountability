@@ -3,7 +3,7 @@
     %ul
       %li
         %label{:for => :category} Category
-        = allocation_form.select :category_id, @category_options
+        = allocation_form.select :category_id, category_selection, :include_blank => "--set category--"
       %li
         %label{:for => :outgoing_category} Amount
         = allocation_form.text_field :amount
