@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081216050407) do
+ActiveRecord::Schema.define(:version => 20081229044950) do
 
   create_table "accounts", :force => true do |t|
     t.string   "title"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20081216050407) do
     t.decimal  "budgeted_amount"
     t.string   "budgeted_period_type",       :default => "Annually"
     t.date     "budgeted_period_start_date"
-    t.string   "type"
+    t.string   "applies_to"
     t.decimal  "bought_forward",             :default => 0.0
     t.date     "date_bought_forward"
   end

@@ -27,6 +27,8 @@ class CategoryAllocation < ActiveRecord::Base
     lambda{|from_date, to_date|
       { :conditions => ["created_at between ? and ?", from_date, to_date]}
     } 
+
+  
    def sub_allocations
      CategoryAllocation.by_transaction(self.transaction).by_categories_descending_from(self.category)
    end

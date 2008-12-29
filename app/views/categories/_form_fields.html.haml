@@ -1,24 +1,35 @@
 %fieldset
   %ul
     %li
-      %label{:for => :type}Incoming
-      = form_fields.radio_button :type, "Incoming"
-      %label{:for => :type}Outgoing
-      = form_fields.radio_button :type, "Outgoing"
+      %label{:for => :applies_to}Incoming
+      = form_fields.radio_button :applies_to, "Incoming"
+      %label{:for => :applies_to}Outgoing
+      = form_fields.radio_button :applies_to, "Outgoing"
+      %p.hint
+        Select incoming to categorise income with this category, or outgoing to categorise money spent with this category.
     %li
       %label{:for => :parent} Parent 
       = form_fields.select :parent_id, category_selection, :include_blank => "-- set parent--"
+      %p.hint
+        If a parent category is selected, then values from this category will count towards the consumption of its budget
     %li
       %label{:for => :name} Name
       = form_fields.text_field :name
     %li
       %label{:for => :budgeted_amount} Budgeted Amount
       = form_fields.text_field :budgeted_amount
+      %p.hint
+        This amount (+ the budget amount in any sub categories) adds to the total you can spend in a given period 
     %li
       %label{:for => :budgeted_period_type} Budgeted Period Type
       = form_fields.select :budgeted_period_type, ["Daily", "Weekly", "Fortnightly", "Monthly", "Bi-Monthly", "Quaterly", "Half Yearly", "Annually"]
+      %p.hint
+        How often do you expect the budgeted amount to be consumed
     %li
       %label{:for => :budgeted_period_start_date} Budgeted Start Date
       = form_fields.date_select :budgeted_period_start_date
+      %p.hint
+        When's the first period of this budget category start?
+        
 %fieldset
   =form_fields.submit "Save"
