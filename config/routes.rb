@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
 
-  map.resources :accounts
+  map.resources :accounts, :has_many => :statements
   map.resources :outgoings, :has_many => :category_allocations
   map.resources :incomings, :has_many => :category_allocations
   map.resources :categories
