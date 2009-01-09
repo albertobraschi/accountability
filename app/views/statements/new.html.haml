@@ -1,0 +1,33 @@
+%h1 New Statement
+- form_for @statement, :url => account_statements_path(@account) do |f|
+  %ul
+    %li
+      %label{:for => :page_number}Page Number:
+      =f.text_field :page_number
+    %li
+      %label{:for => :from_date}From:
+      =f.date_select :from_date
+    %li
+      %label{:for => :to_date}To:
+      =f.date_select :to_date
+    %li
+      %label{:for => :opening_balance}Opening balance:
+      =f.text_field :opening_balance
+    %li
+      %label{:for => :closing_balance}Closing balance:
+      =f.text_field :closing_balance
+
+
+  %ul
+    %li=submit_tag "Add Statement" 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

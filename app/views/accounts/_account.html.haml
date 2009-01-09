@@ -1,0 +1,12 @@
+%ul
+  - %w( title description account_name account_number institution account_type).each do |f|
+    %li
+      = f
+      \: 
+      = @account.send(f) 
+
+%ul 
+  %li
+    %a{:href => edit_account_path(@account)} Edit
+  %li
+    %a{:href => new_account_statement_path(@account)} New Statement

@@ -1,13 +1,22 @@
 %ul.itemlevel_of_index
   %li
-    = category_item.parent.name if category_item.parent
-    = category_item.name
-    = category_item.remaining_budget
-    from
-    = category_item.budgeted_amount
-    = " plus #{category_item.total_budget} in sub categories" if category_item.descendants.any?
-    = category_item.budgeted_period_type
-    = category_item.budgeted_period_start_date
+    %ul
+      %li
+        = category_item.parent.name if category_item.parent
+        = category_item.name
+        = category_item.remaining_budget
+        from
+        = category_item.budgeted_amount
+        = " plus #{category_item.total_remaining_subcategory_budget} of  #{category_item.total_subcategory_budget}  in sub categories" if category_item.descendants.any?
+      %li
+        = category_item.budgeted_period_type
+        starting
+        = category_item.budgeted_period_start_date
+      %li
+        current period is 
+        =category_item.this_period[:start]
+        to
+        =category_item.this_period[:end]
   %li
     = link_to "Delete", category_path(category_item), :method => :delete
     = link_to "Edit", edit_category_path(category_item)

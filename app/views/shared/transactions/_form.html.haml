@@ -10,3 +10,7 @@
 %p
   %label{:for => "detail"} Detail:
   = f.text_field :detail
+-if @account 
+  %p
+    %label{:for => "statement_id"} Statement:
+    = f.select :statement_id, @account.statements.collect{|s| ["Page: #{s.page_number},  #{s.from_date} - #{s.to_date}",s.id]}

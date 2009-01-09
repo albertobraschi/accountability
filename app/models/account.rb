@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
   has_many :outgoings
   has_many :incomings
+  has_many :statements
   validates_presence_of :account_type
 
   def current_balance at_date=Date.today

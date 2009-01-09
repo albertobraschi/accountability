@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
   def create
 
     @category = Category.new(params[:category])
-    @category.type = params[:category][:type]
+    @category.applies_to = params[:category][:applies_to]
     @category.save!
     @category.move_to_child_of @requested_parent if @requested_parent
     redirect_to categories_path 

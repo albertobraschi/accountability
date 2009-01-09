@@ -1,0 +1,11 @@
+= render :partial => "accounts/account"
+= will_paginate @statements if @statements.any?
+%table
+  - @statements.each do |statement|
+    %tr
+      %td=statement.page_number
+      %td=statement.from_date
+      %td=statement.to_date
+      %td=statement.opening_balance
+      %td=statement.closing_balance
+  
