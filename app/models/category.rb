@@ -25,6 +25,7 @@ class Category < ActiveRecord::Base
     self.budgeted_period_type = "weekly" unless budgeted_period_type
     self.budgeted_period_start_date = Date.today  unless  budgeted_period_start_date
     self.applies_to = 'incoming' unless applies_to
+    self.budgeted_amount = 0 if self.budgeted_amount.is_nil?
   end
 
   def remaining_budget(period=nil)
